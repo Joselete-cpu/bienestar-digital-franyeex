@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué es el Bienestar Digital? - Bienestar Digital</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animaciones flotantes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: pulse 3s infinite;
+            text-decoration: none;
+        }
+
+        .nav-back {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 1.5s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        /* Floating elements */
+        .floating-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            font-size: 2.5rem;
+            animation-delay: 2s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            font-size: 2rem;
+            animation-delay: 4s;
+        }
+
+        .floating-icon:nth-child(4) {
+            top: 30%;
+            right: 30%;
+            font-size: 3.5rem;
+            animation-delay: 1s;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .content-card:nth-child(even) {
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .content-card h2 {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .content-card h3 {
+            color: #764ba2;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .content-card p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-left: 5px solid #667eea;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .principle-item {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .principle-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .principle-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .principle-title {
+            color: #764ba2;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .principle-description {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            background: rgba(102, 126, 234, 0.1);
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            font-size: 1.1rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .benefits-list li:hover {
+            transform: translateX(10px);
+            background: rgba(102, 126, 234, 0.15);
+        }
+
+        .benefits-list li i {
+            color: #667eea;
+            font-size: 1.5rem;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* License section */
+        .license-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 3rem 2rem;
+            margin: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .license-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .license-section p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .license-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .license-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .content-card {
+                padding: 2rem;
+            }
+            
+            .content-card h2 {
+                font-size: 2rem;
+            }
+            
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <i class="fas fa-leaf"></i>
+                Bienestar Digital
+            </a>
+            <a href="index.html" class="nav-back">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="floating-icon"><i class="fas fa-question-circle"></i></div>
+            <div class="floating-icon"><i class="fas fa-balance-scale"></i></div>
+            <div class="floating-icon"><i class="fas fa-brain"></i></div>
+            <div class="floating-icon"><i class="fas fa-heart"></i></div>
+            
+            <div class="hero-content">
+                <h1><i class="fas fa-question-circle"></i> ¿Qué es el Bienestar Digital?</h1>
+                <p class="hero-subtitle">
+                    Descubre los fundamentos de una relación saludable con la tecnología
+                </p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <!-- Definición -->
+            <div class="content-card">
+                <h2><i class="fas fa-lightbulb"></i> Definición y Concepto</h2>
+                <p>
+                    El <strong>bienestar digital</strong> se refiere al estado de salud física, mental, social y emocional que experimentamos como resultado de nuestras interacciones con la tecnología digital. No se trata de evitar la tecnología, sino de desarrollar una relación consciente y equilibrada con ella.
+                </p>
+                
+                <div class="highlight-box">
+                    <i class="fas fa-quote-left" style="color: #667eea; margin-right: 1rem;"></i>
+                    "El bienestar digital es la búsqueda de un equilibrio saludable en el uso de la tecnología que enriquezca nuestras vidas sin dominarlas."
+                </div>
+
+                <p>
+                    En nuestra era hiperconectada, donde pasamos en promedio más de 7 horas diarias interactuando con dispositivos digitales, el bienestar digital se ha convertido en una necesidad fundamental para mantener nuestra salud integral.
+                </p>
+            </div>
+
+            <!-- Por qué es importante -->
+            <div class="content-card">
+                <h2><i class="fas fa-exclamation-triangle"></i> ¿Por qué es Importante?</h2>
+                <p>
+                    La tecnología digital ha transformado radicalmente nuestra forma de vivir, trabajar y relacionarnos. Sin embargo, su uso excesivo o inadecuado puede generar consecuencias negativas en múltiples aspectos de nuestra vida.
+                </p>
+
+                <h3><i class="fas fa-brain"></i> Impacto en la Salud Mental</h3>
+                <ul class="benefits-list">
+                    <li><i class="fas fa-eye"></i> <strong>Fatiga visual digital:</strong> Tensión ocular, sequedad y visión borrosa por el uso prolongado de pantallas</li>
+                    <li><i class="fas fa-bed"></i> <strong>Alteraciones del sueño:</strong> La luz azul interfiere con la producción de melatonina</li>
+                    <li><i class="fas fa-users"></i> <strong>Aislamiento social:</strong> Paradójicamente, la hiperconectividad puede generar soledad</li>
+                    <li><i class="fas fa-clock"></i> <strong>Ansiedad por desconexión:</strong> FOMO (Fear of Missing Out) y necesidad constante de verificar notificaciones</li>
+                </ul>
+
+                <h3><i class="fas fa-dumbbell"></i> Impacto en la Salud Física</h3>
+                <ul class="benefits-list">
+                    <li><i class="fas fa-spine"></i> <strong>Problemas posturales:</strong> Dolor de cuello, espalda y hombros por malas posturas</li>
+                    <li><i class="fas fa-hand-paper"></i> <strong>Lesiones por movimientos repetitivos:</strong> Síndrome del túnel carpiano, tendinitis</li>
+                    <li><i class="fas fa-running"></i> <strong>Sedentarismo:</strong> Reducción de la actividad física y sus consecuencias</li>
+                </ul>
+            </div>
+
+            <!-- Principios fundamentales -->
+            <div class="content-card">
+                <h2><i class="fas fa-compass"></i> Principios Fundamentales</h2>
+                <p>
+                    El bienestar digital se basa en cinco principios fundamentales que nos guían hacia un uso más consciente y saludable de la tecnología:
+                </p>
+
+                <div class="principles-grid">
+                    <div class="principle-item">
+                        <div class="principle-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div class="principle-title">Equilibrio</div>
+                        <div class="principle-description">
+                            Encontrar el balance perfecto entre tiempo conectado y desconectado, priorizando actividades offline.
+                        </div>
+                    </div>
+
+                    <div class="principle-item">
+                        <div class="principle-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="principle-title">Conciencia</div>
+                        <div class="principle-description">
+                            Ser conscientes de cómo, cuándo y por qué usamos la tecnología, desarrollando un uso más intencional.
+                        </div>
+                    </div>
+
+                    <div class="principle-item">
+                        <div class="principle-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="principle-title">Gestión del Tiempo</div>
+                        <div class="principle-description">
+                            Establecer límites claros y horarios específicos para el uso de dispositivos y aplicaciones.
+                        </div>
+                    </div>
+
+                    <div class="principle-item">
+                        <div class="principle-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="principle-title">Protección</div>
+                        <div class="principle-description">
+                            Proteger nuestra privacidad, datos personales y bienestar emocional en el entorno digital.
+                        </div>
+                    </div>
+
+                    <div class="principle-item">
+                        <div class="principle-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="principle-title">Propósito</div>
+                        <div class="principle-description">
+                            Usar la tecnología con un propósito claro que aporte valor y mejore nuestra calidad de vida.
+                        </div>
+                    </div>
+
+                    <div class="principle-item">
+                        <div class="principle-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="principle-title">Conexión Real</div>
+                        <div class="principle-description">
+                            Priorizar las relaciones personales auténticas y la comunicación cara a cara.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beneficios -->
+            <div class="content-card">
+                <h2><i class="fas fa-gift"></i> Beneficios del Bienestar Digital</h2>
+                <p>
+                    Adoptar prácticas de bienestar digital genera múltiples beneficios que se reflejan en todos los aspectos de nuestra vida:
+                </p>
+
+                <ul class="benefits-list">
+                    <li><i class="fas fa-brain"></i> <strong>Mayor claridad mental:</strong> Mejora la concentración y reduce la dispersión mental</li>
+                    <li><i class="fas fa-bed"></i> <strong>Mejor calidad del sueño:</strong> Rutinas de descanso más reparadoras y naturales</li>
+                    <li><i class="fas fa-heart"></i> <strong>Relaciones más profundas:</strong> Conexiones más auténticas y significativas</li>
+                    <li><i class="fas fa-chart-line"></i> <strong>Mayor productividad:</strong> Uso más eficiente del tiempo y mejor enfoque en tareas importantes</li>
+                    <li><i class="fas fa-smile"></i> <strong>Reducción del estrés:</strong> Menor ansiedad y mayor sensación de control sobre la tecnología</li>
+                    <li><i class="fas fa-leaf"></i> <strong>Bienestar físico:</strong> Mejora de la postura, reducción de la fatiga visual y más actividad física</li>
+                    <li><i class="fas fa-lightbulb"></i> <strong>Creatividad potenciada:</strong> Más espacio mental para el pensamiento creativo e innovador</li>
+                    <li><i class="fas fa-clock"></i> <strong>Tiempo de calidad:</strong> Aprovechamiento más consciente y satisfactorio del tiempo libre</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-title">¿Listo para Comenzar tu Viaje hacia el Bienestar Digital?</h2>
+                <p class="cta-description">
+                    Ahora que conoces los fundamentos, es momento de poner en práctica estos conocimientos. 
+                    Explora nuestras herramientas y consejos para transformar tu relación con la tecnología.
+                </p>
+                <div class="cta-buttons">
+                    <a href="herramientas.html" class="cta-btn">
+                        <i class="fas fa-tools"></i>
+                        Descubrir Herramientas
+                    </a>
+                    <a href="consejos.html" class="cta-btn secondary">
+                        <i class="fas fa-lightbulb"></i>
+                        Ver Consejos Prácticos
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- License Section -->
+        <section class="license-section">
+            <h3><i class="fab fa-creative-commons"></i> Licencia Creative Commons</h3>
+            <p>Este contenido está licenciado bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)</a></p>
+            <p>Puedes compartir y adaptar este material siempre que mantengas la atribución y compartas bajo la misma licencia.</p>
+            <p><em>Imágenes: Unsplash (Licencia libre) | Videos: YouTube (Uso educativo)</em></p>
+        </section>
+    </main>
+
+    <script>
+        // Efecto parallax suave
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const speed = scrolled * 0.3;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+
+        // Animación de aparición de elementos al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) translateX(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animación
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.content-card, .principle-item');
+            animatedElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                if (index % 2 === 0) {
+                    el.style.transform = 'translateX(-50px)';
+                } else {
+                    el.style.transform = 'translateX(50px)';
+                }
+                el.style.transition = 'all 0.8s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Efecto hover mejorado para los principios
+        document.querySelectorAll('.principle-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Animación de los elementos de lista al hacer hover
+        document.querySelectorAll('.benefits-list li').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateX(15px)';
+                item.style.background = 'rgba(102, 126, 234, 0.2)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateX(0)';
+                item.style.background = 'rgba(102, 126, 234, 0.1)';
+            });
+        });
+    </script>
+</body>
+</html>

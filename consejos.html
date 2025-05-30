@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consejos Prácticos - Bienestar Digital</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animaciones flotantes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: pulse 3s infinite;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 1.5s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        /* Floating elements */
+        .floating-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            font-size: 2.5rem;
+            animation-delay: 2s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            font-size: 2rem;
+            animation-delay: 4s;
+        }
+
+        .floating-icon:nth-child(4) {
+            top: 30%;
+            right: 30%;
+            font-size: 3.5rem;
+            animation-delay: 1s;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 1s ease-out;
+        }
+
+        /* Tips Grid */
+        .tips-grid {
+            display: grid;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .tip-category {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: bounceIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tip-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: all 0.6s;
+        }
+
+        .tip-category:hover::before {
+            left: 100%;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .tips-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tip-item {
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .tip-item:nth-child(even) {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .tip-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.2);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .tip-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tip-icon {
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        .tip-title {
+            font-size: 1.3rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .tip-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .tip-action {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .tip-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Quick Start Section */
+        .quick-start {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .quick-start-content {
+            max-width: 800px;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .quick-start h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .quick-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .step-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .step-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        /* License section */
+        .license-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 3rem 2rem;
+            margin: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .license-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .license-section p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .license-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .license-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .tip-category {
+                padding: 2rem;
+            }
+
+            .tips-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+
+            .quick-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .category-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <i class="fas fa-leaf"></i>
+                Bienestar Digital
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="que-es.html">Qué es</a>
+                <a href="herramientas.html">Herramientas</a>
+                <a href="consejos.html" class="active">Consejos</a>
+                <a href="plan-accion.html">Plan de Acción</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="floating-icon"><i class="fas fa-lightbulb"></i></div>
+            <div class="floating-icon"><i class="fas fa-clock"></i></div>
+            <div class="floating-icon"><i class="fas fa-brain"></i></div>
+            <div class="floating-icon"><i class="fas fa-heart"></i></div>
+            
+            <div class="hero-content">
+                <h1><i class="fas fa-lightbulb"></i> Consejos Prácticos</h1>
+                <p class="hero-subtitle">
+                    Estrategias efectivas para mejorar tu relación con la tecnología
+                </p>
+            </div>
+        </section>
+
+        <!-- Quick Start Section -->
+        <section class="quick-start">
+            <div class="quick-start-content">
+                <h3><i class="fas fa-rocket"></i> Comienza Ahora Mismo</h3>
+                <p>Estos 4 pasos te ayudarán a implementar el bienestar digital desde hoy</p>
+                
+                <div class="quick-steps">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h4 class="step-title">Evalúa tu Uso</h4>
+                        <p class="step-description">Revisa el tiempo que pasas en cada app</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h4 class="step-title">Establece Límites</h4>
+                        <p class="step-description">Define horarios libres de pantallas</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h4 class="step-title">Optimiza Notificaciones</h4>
+                        <p class="step-description">Desactiva las distracciones innecesarias</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <h4 class="step-title">Crea Rutinas</h4>
+                        <p class="step-description">Establece hábitos saludables consistentes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <h2 class="section-title">Consejos por Categorías</h2>
+            
+            <div class="tips-grid">
+                <!-- Gestión del Tiempo -->
+                <div class="tip-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3 class="category-title">Gestión del Tiempo</h3>
+                    </div>
+                    
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-ban tip-icon"></i>
+                                <h4 class="tip-title">Técnica Pomodoro Digital</h4>
+                            </div>
+                            <p class="tip-description">
+                                Trabaja en bloques de 25 minutos con 5 minutos de descanso. Durante los descansos, evita las pantallas y haz ejercicios de estiramiento o respiración.
+                            </p>
+                            <button class="tip-action">Probar Técnica</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-calendar-alt tip-icon"></i>
+                                <h4 class="tip-title">Horarios Sin Pantallas</h4>
+                            </div>
+                            <p class="tip-description">
+                                Establece períodos específicos del día libres de dispositivos: la primera hora al despertar, durante las comidas y una hora antes de dormir.
+                            </p>
+                            <button class="tip-action">Crear Horario</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-stopwatch tip-icon"></i>
+                                <h4 class="tip-title">Límites de Aplicaciones</h4>
+                            </div>
+                            <p class="tip-description">
+                                Configura límites diarios para redes sociales y apps de entretenimiento. Usa las herramientas nativas de tu dispositivo o apps especializadas.
+                            </p>
+                            <button class="tip-action">Configurar Límites</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-eye tip-icon"></i>
+                                <h4 class="tip-title">Regla 20-20-20</h4>
+                            </div>
+                            <p class="tip-description">
+                                Cada 20 minutos, mira algo a 20 pies de distancia (6 metros) durante 20 segundos. Esto reduce la fatiga visual y te da micro-descansos mentales.
+                            </p>
+                            <button class="tip-action">Activar Recordatorio</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salud Mental -->
+                <div class="tip-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="category-title">Salud Mental</h3>
+                    </div>
+                    
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-bell-slash tip-icon"></i>
+                                <h4 class="tip-title">Gestión de Notificaciones</h4>
+                            </div>
+                            <p class="tip-description">
+                                Desactiva notificaciones no esenciales. Mantén solo las importantes: llamadas, mensajes familiares y recordatorios de salud.
+                            </p>
+                            <button class="tip-action">Revisar Notificaciones</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-moon tip-icon"></i>
+                                <h4 class="tip-title">Rutina Nocturna Digital</h4>
+                            </div>
+                            <p class="tip-description">
+                                Activa modo nocturno 2 horas antes de dormir. Usa filtros de luz azul y evita contenido estimulante. Carga el teléfono fuera del dormitorio.
+                            </p>
+                            <button class="tip-action">Configurar Rutina</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-leaf tip-icon"></i>
+                                <h4 class="tip-title">Mindfulness Digital</h4>
+                            </div>
+                            <p class="tip-description">
+                                Antes de abrir una app, haz una pausa y pregúntate: "¿Por qué quiero usar esto ahora?" Practica el uso consciente e intencional.
+                            </p>
+                            <button class="tip-action">Practicar Mindfulness</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-users tip-icon"></i>
+                                <h4 class="tip-title">Conexiones Reales</h4>
+                            </div>
+                            <p class="tip-description">
+                                Por cada hora en redes sociales, dedica 30 minutos a interacciones cara a cara. Prioriza las conversaciones profundas sobre los likes.
+                            </p>
+                            <button class="tip-action">Planificar Encuentros</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productividad -->
+                <div class="tip-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="category-title">Productividad</h3>
+                    </div>
+                    
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-focus tip-icon"></i>
+                                <h4 class="tip-title">Trabajo Profundo</h4>
+                            </div>
+                            <p class="tip-description">
+                                Crea bloques de 2-4 horas sin interrupciones digitales. Silencia el teléfono, cierra pestañas innecesarias y usa apps de bloqueo de distracciones.
+                            </p>
+                            <button class="tip-action">Crear Bloque</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-inbox tip-icon"></i>
+                                <h4 class="tip-title">Inbox Zero</h4>
+                            </div>
+                            <p class="tip-description">
+                                Revisa el email solo 2-3 veces al día en horarios específicos. Responde inmediatamente, archiva o programa para después. No lo uses como to-do list.
+                            </p>
+                            <button class="tip-action">Organizar Email</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-layer-group tip-icon"></i>
+                                <h4 class="tip-title">Monofocus</h4>
+                            </div>
+                            <p class="tip-description">
+                                Evita la multitarea digital. Concéntrate en una sola aplicación o tarea a la vez. Cierra pestañas y apps que no estés usando activamente.
+                            </p>
+                            <button class="tip-action">Practicar Monofocus</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-sync tip-icon"></i>
+                                <h4 class="tip-title">Automatización Inteligente</h4>
+                            </div>
+                            <p class="tip-description">
+                                Automatiza tareas repetitivas: respuestas predefinidas, filtros de email, sincronización de calendarios. Usa la tecnología para reducir la carga mental.
+                            </p>
+                            <button class="tip-action">Configurar Automatización</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bienestar Físico -->
+                <div class="tip-category">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3 class="category-title">Bienestar Físico</h3>
+                    </div>
+                    
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-walking tip-icon"></i>
+                                <h4 class="tip-title">Descansos Activos</h4>
+                            </div>
+                            <p class="tip-description">
+                                Cada hora de trabajo en pantalla, levántate y muévete durante 5 minutos. Camina, estira o haz ejercicios de cuello y espalda.
+                            </p>
+                            <button class="tip-action">Programar Descansos</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-desktop tip-icon"></i>
+                                <h4 class="tip-title">Ergonomía Digital</h4>
+                            </div>
+                            <p class="tip-description">
+                                Ajusta la altura de la pantalla a nivel de los ojos, mantén una distancia de brazo extendido y usa sillas que apoyen la curvatura natural de la espalda.
+                            </p>
+                            <button class="tip-action">Evaluar Postura</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-sun tip-icon"></i>
+                                <h4 class="tip-title">Luz Natural</h4>
+                            </div>
+                            <p class="tip-description">
+                                Busca exposición a luz natural durante el día. Trabaja cerca de ventanas cuando sea posible y sal al exterior durante los descansos.
+                            </p>
+                            <button class="tip-action">Planificar Exposición</button>
+                        </div>
+                        
+                        <div class="tip-item">
+                            <div class="tip-header">
+                                <i class="fas fa-tint tip-icon"></i>
+                                <h4 class="tip-title">Hidratación Consciente</h4>
+                            </div>
+                            <p class="tip-description">
+                                Mantén una botella de agua cerca de tu espacio de trabajo. Usa recordatorios digitales para beber agua regularmente, especialmente durante sesiones largas.
+                            </p>
+                            <button class="tip-action">Configurar Recordatorios</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- License Section -->
+        <section class="license-section">
+            <h3><i class="fab fa-creative-commons"></i> Licencia Creative Commons</h3>
+            <p>Este contenido está licenciado bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)</a></p>
+            <p>Puedes compartir y adaptar este material siempre que mantengas la atribución y compartas bajo la misma licencia.</p>
+            <p><em>Imágenes: Unsplash (Licencia libre) | Videos: YouTube (Uso educativo)</em></p>
+        </section>
+    </main>
+
+    <script>
+        // Efecto parallax suave
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const speed = scrolled * 0.3;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+
+        // Animación de aparición de elementos al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animación
+        document.addEventListener('DOMContentLoaded', ()

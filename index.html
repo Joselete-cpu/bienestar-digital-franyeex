@@ -3,39 +3,542 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienestar Digital</title>
-    <link rel="stylesheet" href="estilos.css">
+    <title>Bienestar Digital - Inicio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animaciones flotantes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: pulse 3s infinite;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 1.5s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        /* Floating elements */
+        .floating-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            font-size: 2.5rem;
+            animation-delay: 2s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            font-size: 2rem;
+            animation-delay: 4s;
+        }
+
+        .floating-icon:nth-child(4) {
+            top: 30%;
+            right: 30%;
+            font-size: 3.5rem;
+            animation-delay: 1s;
+        }
+
+        /* Navigation Cards */
+        .nav-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 1s ease-out;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .nav-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: all 0.6s;
+        }
+
+        .nav-card:hover::before {
+            left: 100%;
+        }
+
+        .nav-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.2);
+        }
+
+        .nav-card:nth-child(1) { animation-delay: 0.2s; }
+        .nav-card:nth-child(2) { animation-delay: 0.4s; }
+        .nav-card:nth-child(3) { animation-delay: 0.6s; }
+        .nav-card:nth-child(4) { animation-delay: 0.8s; }
+
+        .card-icon {
+            font-size: 4rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .card-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Features section */
+        .features-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 5rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            text-align: center;
+            color: white;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .feature-item i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .feature-item:nth-child(1) i { animation-delay: 0s; }
+        .feature-item:nth-child(2) i { animation-delay: 1s; }
+        .feature-item:nth-child(3) i { animation-delay: 2s; }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .feature-description {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* License section */
+        .license-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 3rem 2rem;
+            margin: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .license-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .license-section p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .license-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .license-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .nav-card {
+                padding: 2rem;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Bienestar Digital</h1>
         <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="impacto.html">Impacto en la Salud Mental</a></li>
-                <li><a href="desconectar.html">Técnicas para Desconectar</a></li>
-                <li><a href="herramientas.html">Tecnología para el Bienestar</a></li>
-                <li><a href="futuro.html">El Futuro del Bienestar Digital</a></li>
-            </ul>
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+                Bienestar Digital
+            </div>
         </nav>
     </header>
 
-    <section id="inicio">
-        <h2>Bienestar Digital: Una Introducción</h2>
-        <p>
-            En la era digital, el bienestar físico y mental puede verse afectado por el uso excesivo de la tecnología. El bienestar digital
-            busca encontrar un equilibrio entre el uso saludable de la tecnología y la preservación de nuestra salud. A través de este sitio,
-            exploraremos cómo la tecnología impacta nuestra vida diaria y cómo podemos encontrar un balance.
-        </p>
-        <img src="https://via.placeholder.com/600x300" alt="Bienestar digital" class="imagen-principal">
-        <p>Explora nuestras subpáginas para aprender más sobre cómo equilibrar la tecnología con el bienestar.</p>
-    </section>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="floating-icon"><i class="fas fa-mobile-alt"></i></div>
+            <div class="floating-icon"><i class="fas fa-heart"></i></div>
+            <div class="floating-icon"><i class="fas fa-balance-scale"></i></div>
+            <div class="floating-icon"><i class="fas fa-brain"></i></div>
+            
+            <div class="hero-content">
+                <h1><i class="fas fa-leaf"></i> Bienestar Digital</h1>
+                <p class="hero-subtitle">Tecnología para Vivir Mejor</p>
+                <p class="hero-description">
+                    Descubre cómo encontrar el equilibrio perfecto entre la tecnología y tu bienestar personal. 
+                    Aprende a usar la tecnología de forma consciente, saludable y productiva.
+                </p>
+            </div>
+        </section>
 
-    <footer>
-        <p>Licencia: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC-BY-SA 4.0</a></p>
-        <p>&copy; 2025 Bienestar Digital</p>
-    </footer>
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-balance-scale"></i>
+                    <h3 class="feature-title">Equilibrio Perfecto</h3>
+                    <p class="feature-description">Encuentra el balance ideal entre conectividad y descanso digital</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3 class="feature-title">Protección Mental</h3>
+                    <p class="feature-description">Cuida tu salud mental con hábitos digitales saludables</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-rocket"></i>
+                    <h3 class="feature-title">Mayor Productividad</h3>
+                    <p class="feature-description">Optimiza tu tiempo y enfoque con herramientas inteligentes</p>
+                </div>
+            </div>
+        </section>
 
-    <script src="script.js"></script>
+        <!-- Navigation Section -->
+        <section class="nav-section">
+            <h2 class="section-title">Explora Nuestro Contenido</h2>
+            
+            <div class="cards-grid">
+                <div class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="card-title">¿Qué es el Bienestar Digital?</h3>
+                    <p class="card-description">
+                        Comprende los conceptos fundamentales del bienestar digital y por qué es crucial en nuestra era tecnológica.
+                    </p>
+                    <a href="que-es.html" class="card-btn">Descubrir</a>
+                </div>
+
+                <div class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="card-title">Herramientas Digitales</h3>
+                    <p class="card-description">
+                        Conoce las mejores aplicaciones y herramientas para monitorear y mejorar tus hábitos digitales.
+                    </p>
+                    <a href="herramientas.html" class="card-btn">Explorar</a>
+                </div>
+
+                <div class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="card-title">Consejos Prácticos</h3>
+                    <p class="card-description">
+                        Estrategias efectivas y consejos prácticos para implementar el bienestar digital en tu día a día.
+                    </p>
+                    <a href="consejos.html" class="card-btn">Aprender</a>
+                </div>
+
+                <div class="nav-card">
+                    <div class="card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="card-title">Plan de Acción</h3>
+                    <p class="card-description">
+                        Crea tu plan personalizado de bienestar digital y establece metas alcanzables para tu crecimiento.
+                    </p>
+                    <a href="plan-accion.html" class="card-btn">Comenzar</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- License Section -->
+        <section class="license-section">
+            <h3><i class="fab fa-creative-commons"></i> Licencia Creative Commons</h3>
+            <p>Este contenido está licenciado bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0)</a></p>
+            <p>Puedes compartir y adaptar este material siempre que mantengas la atribución y compartas bajo la misma licencia.</p>
+            <p><em>Imágenes: Unsplash (Licencia libre) | Videos: YouTube (Uso educativo)</em></p>
+        </section>
+    </main>
+
+    <script>
+        // Efecto parallax suave
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+
+        // Animación de aparición de elementos al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animación
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.nav-card, .feature-item');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Efecto hover mejorado para las tarjetas
+        document.querySelectorAll('.nav-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Acción - Bienestar Digital</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animaciones flotantes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes progressFill {
+            from {
+                width: 0%;
+            }
+            to {
+                width: var(--progress-width);
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: pulse 3s infinite;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 1.5s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        /* Floating elements */
+        .floating-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            font-size: 2.5rem;
+            animation-delay: 2s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            font-size: 2rem;
+            animation-delay: 4s;
+        }
+
+        .floating-icon:nth-child(4) {
+            top: 30%;
+            right: 30%;
+            font-size: 3.5rem;
+            animation-delay: 1s;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 1s ease-out;
+        }
+
+        /* Assessment Section */
+        .assessment-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: bounceIn 1s ease-out;
+        }
+
+        .assessment-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .assessment-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .question {
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .options {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .option input[type="radio"] {
+            accent-color: #667eea;
+        }
+
+        /* Results Section */
+        .results-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(#667eea 0deg, #764ba2 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .score-inner {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .score-level {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .score-description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Plan Timeline */
+        .timeline-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+            padding: 0 2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 15px solid transparent;
+            border-left-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 15px solid transparent;
+            border-right-color: white;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border: 4px solid white;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 0 4px #667eea;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: -60px;
+        }
+
+        .week-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .week-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .week-goals {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .week-goals li {
+            padding: 0.5rem 0;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .week-goals li::before {
+            content: '✓';
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .progress-tracker {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: bold;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Resources Section */
+        .resources-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .resources-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            color: white;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .resource-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .resource-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .resource-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .resource-description {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* License section */
+        .license-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 3rem 2rem;
+            margin: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .license-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .license-section p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .license-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .license-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 50px;
+            }
+
+            .timeline-item .timeline-marker {
+                left: 10px !important;
+            }
+
+            .timeline-content::after {
+                display: none;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <i class="fas fa-leaf"></i>
+                Bienestar Digital
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="que-es.html">Qué es</a>
+                <a href="herramientas.html">Herramientas</a>
+                <a href="consejos.html">Consejos</a>
+                <a href="plan-accion.html" class="active">Plan de Acción</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="floating-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="floating-icon"><i class="fas fa-target"></i></div>
+            <div class="floating-icon"><i class="fas fa-calendar-check"></i></div>
+            <div class="floating-icon"><i class="fas fa-trophy"></i></div>
+            
+            <div class="hero-content">
+                <h1><i class="fas fa-chart-line"></i> Plan de Acción</h1>
+                <p class="hero-subtitle">
+                    Crea tu estrategia personalizada para alcanzar el bienestar digital
+                </p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="content-section">
+            <h2 class="section-title">Tu Camino hacia el Bienestar Digital</h2>
+            
+            <!-- Assessment Section -->
+            <div class="assessment-section">
+                <h3 class="assessment-title">
+                    <i class="fas fa-clipboard-check assessment-icon"></i>
+                    Evaluación Inicial
+                </h3>
+                
+                <div class="quiz-container">
+                    <div class="question">
+                        <p class="question-text">1. ¿Cuántas horas al día estimas que usas dispositivos digitales?</p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q1" value="1">
+                                <span>Menos de 3 horas</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="2">
+                                <span>3-6 horas</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="3">
+                                <span>6-9 horas</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q1" value="4">
+                                <span>Más de 9 horas</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <p class="question-text">2. ¿Con qué frecuencia revisas tu teléfono sin una razón específica?</p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q2" value="1">
+                                <span>Raramente (1-5 veces al día)</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="2">
+                                <span>Ocasionalmente (6-20 veces al día)</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="3">
+                                <span>Frecuentemente (21-50 veces al día)</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q2" value="4">
+                                <span>Constantemente (más de 50 veces al día)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <p class="question-text">3. ¿Cómo te sientes cuando no puedes acceder a tus dispositivos?</p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q3" value="1">
+                                <span>Relajado y tranquilo</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="2">
+                                <span>Un poco incómodo pero manejable</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="3">
+                                <span>Ansioso y preocupado</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q3" value="4">
+                                <span>Muy estresado y agitado</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <p class="question-text">4. ¿Qué tan seguido usas dispositivos antes de dormir?</p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q4" value="1">
+                                <span>Nunca (1 hora antes de dormir)</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="2">
+                                <span>Ocasionalmente</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="3">
+                                <span>Frecuentemente</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q4" value="4">
+                                <span>Siempre (hasta quedarme dormido)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <p class="question-text">5. ¿Qué tan productivo te sientes con tu uso actual de la tecnología?</p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="q5" value="4">
+                                <span>Muy productivo</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="3">
+                                <span>Moderadamente productivo</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="2">
+                                <span>Poco productivo</span>
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="q5" value="1">
+                                <span>Nada productivo</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn" onclick="calculateResults()">
+                            <i class="fas fa-calculator"></i>
+                            Función No disponible
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="results">
+                <div class="score-display">
+                    <div class="score-circle">
+                        <div class="score-inner">
+                            <div class="score-number" id="scoreNumber">0</div>
+                            <div class="score-label">/ 20</div>
+                        </div>
+                    </div>
+                    <div class="score-level" id="scoreLevel">Nivel de Bienestar</div>
+                    <div class="score-description" id="scoreDescription">Descripción del nivel actual</div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn" onclick="generatePlan()">
+                        <i class="fas fa-magic"></i>
+                        Generar Mi Plan
+                    </button>
+                    <button class="btn btn-secondary" onclick="retakeAssessment()">
+                        <i class="fas fa-redo"></i>
+                        Repetir Evaluación
+                    </button>
+                </div>
+            </div>
+
+            <!-- Timeline Section -->
+            <div class="timeline-section" id="timeline" style="display: none;">
+                <h3 class="timeline-title">
+                    <i class="fas fa-calendar-alt assessment-icon"></i>
+                    Tu Plan de 8 Semanas
+                </h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="week-number">Semana 1</div>
+                            <div class="week-title">Conciencia Digital</div>
+                            <ul class="week-goals">
+                                <li>Instalar app de seguimiento de tiempo de pantalla</li>
+                                <li>Hacer auditoría de notificaciones</li>
+                                <li>Establecer horario fijo para revisar emails</li>
+                                <li>Crear zona libre de dispositivos en casa</li>
+                            </ul>
+                            <div class="progress-tracker">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 0%"></div>
+                                </div>
+                                <div class="progress-text">0%</div>
+                            </div>

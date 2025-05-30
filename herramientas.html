@@ -3,44 +3,834 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tecnología para el Bienestar</title>
-    <link rel="stylesheet" href="estilos.css">
+    <title>Herramientas Digitales - Bienestar Digital</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animaciones flotantes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-180deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0deg);
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: pulse 3s infinite;
+            text-decoration: none;
+        }
+
+        .nav-back {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .nav-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 1.5s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        /* Floating elements */
+        .floating-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            font-size: 2.5rem;
+            animation-delay: 2s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            font-size: 2rem;
+            animation-delay: 4s;
+        }
+
+        .floating-icon:nth-child(4) {
+            top: 30%;
+            right: 30%;
+            font-size: 3.5rem;
+            animation-delay: 1s;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 1s ease-out;
+        }
+
+        .category-section {
+            margin-bottom: 5rem;
+        }
+
+        .category-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .category-header h2 {
+            color: #667eea;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .category-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: all 0.6s;
+        }
+
+        .tool-card:hover::before {
+            left: 100%;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.2);
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            color: #667eea;
+            animation: rotateIn 1s ease-out;
+        }
+
+        .tool-title {
+            color: #333;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .tool-platform {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .platform-badge {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .platform-badge.free {
+            background: linear-gradient(45deg, #10b981, #059669);
+        }
+
+        .platform-badge.premium {
+            background: linear-gradient(45deg, #f59e0b, #d97706);
+        }
+
+        .tool-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tool-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .tool-features li {
+            padding: 0.5rem 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .tool-features li i {
+            color: #667eea;
+            width: 20px;
+        }
+
+        .tool-rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stars {
+            color: #f59e0b;
+        }
+
+        .rating-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .tool-link {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .tool-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Tips Section */
+        .tips-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+            border-radius: 20px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tip-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .tip-icon {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .tip-title {
+            color: #333;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .tip-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cta-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* License section */
+        .license-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 3rem 2rem;
+            margin: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .license-section h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .license-section p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .license-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .license-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tool-card {
+                padding: 2rem;
+            }
+            
+            .category-header {
+                padding: 1.5rem;
+            }
+            
+            .category-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Bienestar Digital</h1>
         <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="impacto.html">Impacto en la Salud Mental</a></li>
-                <li><a href="desconectar.html">Técnicas para Desconectar</a></li>
-                <li><a href="herramientas.html">Tecnología para el Bienestar</a></li>
-                <li><a href="futuro.html">El Futuro del Bienestar Digital</a></li>
-            </ul>
+            <a href="index.html" class="logo">
+                <i class="fas fa-leaf"></i>
+                Bienestar Digital
+            </a>
+            <a href="index.html" class="nav-back">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
         </nav>
     </header>
 
-    <section>
-        <h2>Tecnología para el Bienestar</h2>
-        <p>
-            La tecnología también puede ser una herramienta útil para mejorar nuestra salud y bienestar. Aquí exploramos algunas
-            aplicaciones y dispositivos que pueden ayudarte a llevar un estilo de vida más saludable.
-        </p>
-        <h3>Aplicaciones Recomendadas:</h3>
-        <ul>
-            <li><strong>Headspace:</strong> Una aplicación de meditación que ayuda a reducir el estrés y mejorar el enfoque.</li>
-            <li><strong>Fitbit:</strong> Un dispositivo que monitorea tu actividad física, ritmo cardíaco y calidad de sueño.</li>
-            <li><strong>Calm:</strong> Una aplicación de relajación y meditación que promueve el bienestar mental.</li>
-            <li><strong>Forest:</strong> Una app que te ayuda a concentrarte mientras creas un "bosque virtual".</li>
-        </ul>
-        <img src="https://via.placeholder.com/600x300" alt="Tecnología para el bienestar" class="imagen-principal">
-    </section>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="floating-icon"><i class="fas fa-tools"></i></div>
+            <div class="floating-icon"><i class="fas fa-mobile-alt"></i></div>
+            <div class="floating-icon"><i class="fas fa-clock"></i></div>
+            <div class="floating-icon"><i class="fas fa-shield-alt"></i></div>
+            
+            <div class="hero-content">
+                <h1><i class="fas fa-tools"></i> Herramientas Digitales</h1>
+                <p class="hero-subtitle">
+                    Aplicaciones y recursos para mejorar tu bienestar digital
+                </p>
+            </div>
+        </section>
 
-    <footer>
-        <p>Licencia: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC-BY-SA 4.0</a></p>
-        <p>&copy; 2025 Bienestar Digital</p>
-    </footer>
+        <!-- Content Section -->
+        <section class="content-section">
+            <!-- Monitoreo y Control de Tiempo -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h2><i class="fas fa-clock"></i> Monitoreo y Control de Tiempo de Pantalla</h2>
+                    <p>Herramientas para entender y controlar cuánto tiempo pasas en tus dispositivos y aplicaciones</p>
+                </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div>
+                                <div class="tool-title">Screen Time (iOS)</div>
+                                <div class="tool-platform">
+                                    <span class="platform-badge">iOS</span>
+                                    <span class="platform-badge free">Gratuito</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">
+                            Herramienta nativa de Apple que proporciona información detallada sobre el uso del dispositivo y permite establecer límites de tiempo para aplicaciones específicas.
+                        </p>
+                        <ul class="tool-features">
+                            <li><i class="fas fa-chart-bar"></i> Informes detallados de uso</li>
+                            <li><i class="fas fa-ban"></i> Límites de tiempo por aplicación</li>
+                            <li><i class="fas fa-moon"></i> Tiempo de inactividad programado</li>
+                            <li><i class="fas fa-users"></i> Control parental integrado</li>
+                        </ul>
+                        <div class="tool-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">4.5/5 - Integrado en iOS</span>
+                        </div>
+                        <a href="#" class="tool-link">
+                            <i class="fas fa-cog"></i>
+                            Configurar en Ajustes
+                        </a>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">
+                                <i class="fab fa-android"></i>
+                            </div>
+                            <div>
+                                <div class="tool-title">Digital Wellbeing</div>
+                                <div class="tool-platform">
+                                    <span class="platform-badge">Android</span>
+                                    <span class="platform-badge free">Gratuito</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">
+                            Suite de herramientas de Google para Android que ayuda a comprender y controlar el uso del teléfono con funciones de bienestar digital integradas.
+                        </p>
+                        <ul class="tool-features">
+                            <li><i class="fas fa-pie-chart"></i> Dashboard de uso diario</li>
+                            <li><i class="fas fa-pause"></i> Temporizadores de aplicaciones</li>
+                            <li><i class="fas fa-bed"></i> Modo descanso nocturno</li>
+                            <li><i class="fas fa-focus-ring"></i> Modo concentración</li>
+                        </ul>
+                        <div class="tool-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.2/5 - Integrado en Android</span>
+                        </div>
+                        <a href="#" class="tool-link">
+                            <i class="fas fa-cog"></i>
+                            Activar en Ajustes
+                        </a>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div>
+                                <div class="tool-title">RescueTime</div>
+                                <div class="tool-platform">
+                                    <span class="platform-badge">Multiplataforma</span>
+                                    <span class="platform-badge free">Freemium</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">
+                            Aplicación multiplataforma que rastrea automáticamente el tiempo que pasas en sitios web y aplicaciones, proporcionando informes detallados de productividad.
+                        </p>
+                        <ul class="tool-features">
+                            <li><i class="fas fa-robot"></i> Seguimiento automático</li>
+                            <li><i class="fas fa-chart-line"></i> Análisis de productividad</li>
+                            <li><i class="fas fa-bell-slash"></i> Bloqueo de sitios web</li>
+                            <li><i class="fas fa-target"></i> Establecimiento de objetivos</li>
+                        </ul>
+                        <div class="tool-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">4.3/5 - Muy completo</span>
+                        </div>
+                        <a href="https://www.rescuetime.com" class="tool-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Visitar Sitio Web
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloqueo y Filtrado -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h2><i class="fas fa-shield-alt"></i> Bloqueo y Filtrado de Contenido</h2>
+                    <p>Aplicaciones que te ayudan a bloquear distracciones y mantener el enfoque</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <div>
+                                <div class="tool-title">Forest</div>
+                                <div class="tool-platform">
+                                    <span class="platform-badge">iOS/Android</span>
+                                    <span class="platform-badge premium">Premium</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">
+                            Aplicación gamificada que te ayuda a mantener el enfoque plantando árboles virtuales. Si abandonas la aplicación, tu árbol muere.
+                        </p>
+                        <ul class="tool-features">
+                            <li><i class="fas fa-tree"></i> Plantación de árboles virtuales</li>
+                            <li><i class="fas fa-gamepad"></i> Sistema de gamificación</li>
+                            <li><i class="fas fa-users"></i> Modo colaborativo</li>
+                            <li><i class="fas fa-seedling"></i> Plantación de árboles reales</li>
+                        </ul>
+                        <div class="tool-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">4.8/5 - Muy motivador</span>
+                        </div>
+                        <a href="https://www.forestapp.cc" class="tool-link">
+                            <i class="fas fa-download"></i>
+                            Descargar App
+                        </a>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <div class="tool-icon">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <div>
+                                <div class="tool-title">Cold Turkey</div>
+                                <div class="tool-platform">
+                                    <span class="platform-badge">Windows/Mac</span>
+                                    <span class="platform-badge free">Freemium</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="tool-description">
+                            Potente bloqueador de aplicaciones y sitios web para computadoras que permite crear horarios personalizados de bloqueo.
+                        </p>
+                        <ul class="tool-features">
+                            <li><i class="fas fa-clock"></i> Programación de bloqueos</li>
+                            <li><i class="fas fa-desktop"></i> Bloqueo de aplicaciones</li>
+                            <li><i class="fas fa-globe"></i> Filtrado web avanzado</li>
+                            <li><i class="fas fa-lock"></i> Modo forzado (difícil de desactivar)</li>
+                        </ul>
+                        <div class="tool-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-text">4.6/5 - Muy efectivo</span>
+                        </div>
+                        <a href="https://getcoldturkey.com" class="tool-link">
+                            <i class="fas fa-download"></i>
+                            Descargar Gratis
+                        </a>
+                    </div>
+
+                    <div class="tool-card">
+                        <div class="tool-header">
+                            <p>proximamente</p>
