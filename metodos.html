@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formas de Pago Electrónico - Bienestar Digital</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animaciones flotantes */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: pulse 3s infinite;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 1.5s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        /* Floating icons */
+        .floating-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            font-size: 2.5rem;
+            animation-delay: 2s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            font-size: 2rem;
+            animation-delay: 4s;
+        }
+
+        /* Main content */
+        .main-content {
+            padding: 3rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: slideInUp 1s ease-out;
+        }
+
+        /* Payment methods */
+        .payment-methods {
+            display: grid;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .payment-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            animation: bounceIn 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: all 0.6s;
+        }
+
+        .payment-card:hover::before {
+            left: 100%;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.2);
+        }
+
+        .payment-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-icon {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        .payment-title {
+            font-size: 2rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .payment-description {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .payment-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .detail-section {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .detail-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-list li {
+            padding: 0.3rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .detail-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .example-section {
+            background: rgba(118, 75, 162, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 1rem;
+            border-left: 4px solid #764ba2;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example-text {
+            color: #555;
+            font-style: italic;
+        }
+
+        /* Comparison table */
+        .comparison-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:hover {
+            background-color: rgba(102, 126, 234, 0.05);
+        }
+
+        /* Recommendations */
+        .recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .recommendation-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .recommendation-card h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .recommendation-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #764ba2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .payment-card {
+                padding: 2rem;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+            
+            .payment-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <i class="fas fa-leaf"></i>
+                Bienestar Digital
+            </a>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Volver al Inicio
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="floating-icon"><i class="fas fa-credit-card"></i></div>
+            <div class="floating-icon"><i class="fas fa-mobile-alt"></i></div>
+            <div class="floating-icon"><i class="fab fa-bitcoin"></i></div>
+            
+            <div class="hero-content">
+                <h1><i class="fas fa-wallet"></i> Formas de Pago Electrónico</h1>
+                <p class="hero-subtitle">Conoce los métodos de pago digital más utilizados en 2025</p>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h2 class="section-title">Métodos de Pago Digital Actuales</h2>
+            
+            <!-- Payment Methods -->
+            <div class="payment-methods">
+                
+                <!-- Tarjetas de Crédito/Débito -->
+                <div class="payment-card">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3 class="payment-title">Tarjetas de Crédito/Débito</h3>
+                    </div>
+                    <p class="payment-description">
+                        <strong>¿Qué es?</strong> Sistema de pago tradicional que utiliza tarjetas plásticas o digitales conectadas a cuentas bancarias. Funcionan mediante la validación de datos en terminales POS o pagos online.
+                    </p>
+                    <div class="payment-details">
+                        <div class="detail-section">
+                            <h4 class="detail-title">
+                                <i class="fas fa-thumbs-up"></i> Ventajas
+                            </h4>
+                            <ul class="detail-list">
+                                <li>Amplia aceptación mundial</li>
+                                <li>Protección ante fraudes</li>
+                                <li>Historial crediticio (crédito)</li>
+                                <li>Programas de recompensas</li>
+                                <li>Facilidad de uso</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4 class="detail-title">
+                                <i class="fas fa-exclamation-triangle"></i> Desventajas
+                            </h4>
+                            <ul class="detail-list">
+                                <li>Comisiones por uso</li>
+                                <li>Riesgo de sobreendeudamiento</li>
+                                <li>Posible clonación</li>
+                                <li>Dependencia de internet/electricidad</li>
+                                <li>Tiempo de procesamiento</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="example-section">
+                        <h4 class="example-title">
+                            <i class="fas fa-lightbulb"></i> Ejemplo de Uso
+                        </h4>
+                        <p class="example-text">
+                            María va al supermercado y paga su compra de 45€ acercando su tarjeta contactless al datáfono. En segundos, el pago se procesa y recibe un SMS confirmando la transacción.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Bizum -->
+                <div class="payment-card">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="payment-title">Bizum</h3>
+                    </div>
+                    <p class="payment-description">
+                        <strong>¿Qué es?</strong> Sistema de pago móvil español que permite transferencias instantáneas entre particulares y pagos en comercios usando solo el número de teléfono. En 2025 incluye Bizum Pay con tecnología NFC.
+                    </p>
+                    <div class="payment-details">
+                        <div class="detail-section">
+                            <h4 class="detail-title">
+                                <i class="fas fa-thumbs-up"></i> Ventajas
+                            </h4>
+                            <ul class="detail-list">
+                                <li>Transferencias instantáneas</li>
+                                <li>Sin comisiones entre particulares</li>
+                                <li>Solo necesitas el teléfono</li>
+                                <li>Integrado con bancos españoles</li>
+                                <li>Muy fácil de usar</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4 class="detail-title">
+                                <i class="fas fa-exclamation-triangle"></i> Desventajas
+                            </h4>
+                            <ul class="detail-list">
+                                <li>Solo disponible en España</li>
+                                <li>Límites de envío diarios</li>
+                                <li>Requiere cuenta bancaria española</li>
+                                <li>Dependiente de cobertura móvil</li>
+                                <li>No reversible una vez enviado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="example-section">
+                        <h4 class="example-title">
+                            <i class="fas fa-lightbulb"></i> Ejemplo de Uso
+                        </h4>
+                        <p class="example-text">
+                            Después de cenar con amigos, Carlos divide la cuenta y envía un Bizum de 25€ a Laura escribiendo su número de teléfono. El dinero llega instantáneamente a su cuenta.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- PayPal -->
+                <div class="payment-card">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <i class="fab fa-paypal"></i>
+                        </div>
+                        <h3 class="payment-title">PayPal</h3>
+                    </div>
+                    <p class="payment-description">
+                        <strong>¿Qué es?</strong> Cartera digital internacional que permite enviar y recibir dinero online sin compartir datos bancarios. Actúa como intermediario entre compradores y vendedores.
+                    </p>
+                    <div class="payment-details">
+                        <div class="detail-section">
+                            <h4 class="detail-title">
+                                <i class="fas fa-thumbs-up"></i> Ventajas
+                            </h4>
+                            <ul class="detail-list">
+                                <li>Protección del comprador</li>
+                                <li>No comparte datos bancarios</li>
+                                <li>Disponible mundialmente</li>
+                                <li>Fácil integración en e-commerce</li>
+                                <li>Múltiples divisas</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4 class="detail-title">
+                                <i class="fas fa-exclamation-triangle"></i> Desventajas
+                            </h4>
+                            <ul class="detail-list">
+                                <li>Comisiones por transacción</li>
+                                <li>Tipos de cambio desfavorables</li>
+                                <li>Puede congelar cuentas</li>
+                                <li>Proceso de disputa complejo</li>
+                                <li>Dependiente de internet</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="example-section">
+                        <h4 class="example-title">
+                            <i class="fas fa-lightbulb"></i> Ejemplo de Uso
+                        </h4>
+                        <p class="example-text">
+                            Ana compra un libro en una tienda online estadounidense por 30$ y paga con PayPal. Sus datos bancarios permanecen seguros y recibe protección ante posibles problemas con el envío.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Apple Pay / Google Pay -->
+                <div class="payment-card">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <i class="fab fa-apple"></i>
+                        </div>
+                        <h3 class="payment-title">Apple Pay / Google Pay</h3>
+                    </div>
+                    <p class="payment-description">
+                        <strong>¿Qué es?</strong> Sistemas de pago móvil que utilizan tecnología NFC para realizar pagos contactless mediante smartphone o smartwatch, tokenizando los datos de las tarjetas para mayor seguridad.
+                    </p>
+                    <div class="payment-details">
+                        <div class="detail-section">
+                            <h4 class="detail-title">
+                                <i class="fas fa-thumbs-up"></i> Ventajas
+                            </h4>
+                            <ul class="detail-list">
+                                <li>Máxima seguridad (tokenización)</li>
+                                <li>Pagos ultra rápidos</li>
+                                <li>No necesitas sacar la tarjeta</li>
+                                <li>Autenticación biométrica</li>
+                                <li>Amplia aceptación</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4 class="detail-title">
+                                <i class="fas fa-exclamation-triangle"></i> Desventajas
+                            </h4>
+                            <ul class="detail-list">
+                                <li>Limitado a dispositivos específicos</li>
+                                <li>Depende de batería del móvil</li>
+                                <li>No todos los comercios lo aceptan</li>
+                                <li>Requiere configuración inicial</li>
+                                <li>Límites en algunos países</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="example-section">
+                        <h4 class="example-title">
+                            <i class="fas fa-lightbulb"></i> Ejemplo de Uso
+                        </h4>
+                        <p class="example-text">
+                            Pedro compra café en su cafetería habitual, acerca su iPhone al datáfono, confirma con Face ID y el pago de 3,50€ se procesa instantáneamente sin sacar la cartera.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Criptomonedas -->
+                <div class="payment-card">
+                    <div class="payment-header">
+                        <div class="payment-icon">
+                            <i class="fab fa-bitcoin"></i>
+                        </div>
+                        <h3 class="payment-title">Criptomonedas (Bitcoin, Ethereum, etc.)</h3>
+                    </div>
+                    <p class="payment-description">
+                        <strong>¿Qué es?</strong> Monedas digitales descentralizadas que utilizan tecnología blockchain para realizar transacciones peer-to-peer sin intermediarios bancarios tradicionales.
+                    </p>
+                    <div class="payment-details">
+                        <div class="detail-section">
+                            <h4 class="detail-title">
+                                <i class="fas fa-thumbs-up"></i> Ventajas
+                            </h4>
+                            <ul class="detail-list">
+                                <li>Transacciones globales 24/7</li>
+                                <li>Comisiones muy bajas</li>
+                                <li>Sin intermediarios bancarios</li>
+                                <li>Alta seguridad criptográfica</li>
+                                <li>Potencial de revalorización</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h4 class="detail-title">
+                                <i class="fas fa-exclamation-triangle"></i> Desventajas
+                            </h4>
+                            <ul class="detail-list">
+                                <li>Alta volatilidad de precios</li>
+                                <li>Aceptación limitada</li>
+                                <li>Transacciones irreversibles</li>
+                                <li>Complejidad técnica</li>
+                                <li>Impacto ambiental (Bitcoin)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="example-section">
+                        <h4 class="example-title">
+                            <i class="fas fa-lightbulb"></i> Ejemplo de Uso
+                        </h4>
+                        <p class="example-text">
+                            Roberto, freelancer, recibe un pago de 500€ en Bitcoin de un cliente en Japón. La transacción se completa en minutos con una comisión de solo 2€, evitando las altas comisiones bancarias internacionales.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Comparison Section -->
+            <div class="comparison-section">
+                <h3 class="comparison-title">
+                    <i class="fas fa-balance-scale"></i> Comparación de Métodos de Pago
+                </h3>
+                
+                <div class="table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Método de Pago</th>
+                                <th>Seguridad</th>
+                                <th>Comodidad</th>
+                                <th>Aceptación</th>
+                                <th>Comisiones</th>
+                                <th>Velocidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tarjetas Crédito/Débito</strong></td>
+                                <td>⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bizum</strong></td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PayPal</strong></td>
+                                <td>⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                                <td>⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Apple Pay / Google Pay</strong></td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Criptomonedas</strong></td>
+                                <td>⭐⭐⭐⭐</td>
+                                <td>⭐⭐</td>
+                                <td>⭐⭐</td>
+                                <td>⭐⭐⭐⭐⭐</td>
+                                <td>⭐⭐⭐</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="recommendations">
+                    <div class="recommendation-card">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <h4>
